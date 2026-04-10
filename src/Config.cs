@@ -4,7 +4,7 @@
  * Created Date: 2026-04-09 22:46:12
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-10 14:54:33
+ * Last Modified: 2026-04-10 15:41:34
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -53,9 +53,7 @@ sealed class Config
     }
 
     // Dummy function to "call" constructor via Instance
-    public void create()
-    {
-    }
+    public void create() {}
 }
 
 

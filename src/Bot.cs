@@ -4,7 +4,7 @@
  * Created Date: 2026-04-09 22:49:21
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-10 14:20:34
+ * Last Modified: 2026-04-10 15:58:37
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -21,6 +21,7 @@ using Fluxify.Commands;
 using Fluxify.Commands.TextCommand;
 using Fluxify.Core;
 using Fluxify.Core.Credentials;
+using Fluxify.Application.Entities.Guilds;
 
 
 // Bot Singleton
@@ -62,7 +63,7 @@ sealed class Bot
     // Registers all commands
     private void registerCommands()
     {
-        bot.Commands.Command("ping", (CommandContext ctx) => ctx.ReplyAsync("Pong!"));
+        bot.Commands.Command("ping", (CommandContext ctx) => ctx.ReplyAsync(getGuildLang(ctx.Guild!).cmdPing));
     }
 
 
@@ -79,5 +80,13 @@ sealed class Bot
         Logger.Instance.LogInformation("Logging in...");
 
         await bot.RunAsync();
+    }
+
+
+    // Returns the language set for a guild
+    private LangItems getGuildLang(Guild guild)
+    {
+        // TODO: [...]
+        return I18n.I.get(Lang.EN);
     }
 }
