@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <RootNamespace>beepBot_fluxer</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Fluxify.Bot" Version="0.1.7-preview" />
+      <PackageReference Include="Fluxify.Commands" Version="0.1.7-preview" />
+      <PackageReference Include="Fluxify.Core" Version="0.1.7-preview" />
+      <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.5" />
+    </ItemGroup>
+
+</Project>
