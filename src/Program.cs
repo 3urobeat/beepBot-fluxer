@@ -4,7 +4,7 @@
  * Created Date: 2026-04-09 22:45:44
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-10 14:54:20
+ * Last Modified: 2026-04-10 16:06:34
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -24,7 +24,9 @@ Logger.Instance.LogInformation("");
 // Load config
 Config.Instance.create();
 
-// Create bot instance and run!
+// Init env
+Console.Title = $"beepBot-fluxer-v{Config.Instance.items.version}";
 Logger.Instance.LogInformation($"beepBot v{Config.Instance.items.version} starting up...");
 
+// Create bot instance and run!
 await Bot.Instance.run();
