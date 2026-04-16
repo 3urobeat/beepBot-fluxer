@@ -4,7 +4,7 @@
  * Created Date: 2026-04-09 22:49:21
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-10 15:58:37
+ * Last Modified: 2026-04-16 19:05:06
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -53,17 +53,32 @@ sealed class Bot
         Logger.Instance.LogInformation("Creating Bot...");
 
         bot = new Fluxify.Bot.Bot(cfg);
-
-        // Register our handlers
-        registerCommands();
-        registerEventHandlers();
     }
 
 
     // Registers all commands
     private void registerCommands()
     {
-        bot.Commands.Command("ping", (CommandContext ctx) => ctx.ReplyAsync(getGuildLang(ctx.Guild!).cmdPing));
+        Logger.Instance.LogInformation("Registering commands...");
+
+        // Find all classes implementing ICommand
+        var commands = typeof(ICommand).Assembly.GetTypes().Where(t => typeof(ICommand).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+        int registerCount = 0;
+
+        foreach (Type commandType in commands)
+        {
+            ICommand command = (ICommand) Activator.CreateInstance(commandType)!;
+
+            // Register each alias of this command
+            foreach (string name in command.names)
+            {
+                Logger.Instance.LogDebug($"Registering command '{name}'...");
+                bot.Commands.Command(name, command.runAsync);
+                registerCount++;
+            }
+        }
+
+        Logger.Instance.LogInformation($"Registered {registerCount} commands!");
     }
 
 
@@ -77,6 +92,10 @@ sealed class Bot
     // Starts the bot
     public async Task run()
     {
+        // Register our handlers
+        registerCommands();
+        registerEventHandlers();
+
         Logger.Instance.LogInformation("Logging in...");
 
         await bot.RunAsync();
@@ -84,7 +103,7 @@ sealed class Bot
 
 
     // Returns the language set for a guild
-    private LangItems getGuildLang(Guild guild)
+    public LangItems getGuildLang(Guild guild)
     {
         // TODO: [...]
         return I18n.I.get(Lang.EN);
