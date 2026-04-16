@@ -4,7 +4,7 @@
  * Created Date: 2026-04-09 22:49:21
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-16 19:05:06
+ * Last Modified: 2026-04-16 20:57:43
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -28,7 +28,9 @@ using Fluxify.Application.Entities.Guilds;
 sealed class Bot
 {
     private static Bot? _instance;
-    private readonly Fluxify.Bot.Bot bot;
+
+    public  readonly Fluxify.Bot.Bot bot; // Fluxify Instance
+
 
     private readonly BotConfig cfg = new BotConfig("*")
     {
