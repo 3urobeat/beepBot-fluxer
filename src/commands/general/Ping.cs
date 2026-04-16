@@ -4,7 +4,7 @@
  * Created Date: 2026-04-15 21:25:31
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-16 21:13:51
+ * Last Modified: 2026-04-16 21:33:59
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -24,14 +24,15 @@ public class CommandPing : ICommand
 {
     Bot bot = Bot.Instance;
 
-    public string[] names       => [ "ping", "pong" ];
-    public string   description => "";
-    public string   usage       => "";
-    public bool     allowdInDm  => true;
+    public string[]         names       => [ "ping", "pong" ];
+    public string           description => "";
+    public ECommandCategory category    => ECommandCategory.GENERAL;
+    public string           usage       => "";
+    public bool             allowdInDm  => true;
 
-    public ICommandOption[] options => [];
+    public ICommandOption[]  options    => [];
 
-    public ECommandPrivilege privilege => ECommandPrivilege.ALL;
+    public ECommandPrivilege privilege  => ECommandPrivilege.ALL;
 
 
     public async Task runAsync(CommandContext ctx)

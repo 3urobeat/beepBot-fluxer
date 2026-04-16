@@ -4,7 +4,7 @@
  * Created Date: 2026-04-10 16:01:14
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-16 21:28:46
+ * Last Modified: 2026-04-16 21:32:42
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -17,6 +17,11 @@
 
 using Fluxify.Commands;
 
+
+public enum ECommandCategory
+{
+    GENERAL
+}
 
 public enum ECommandPrivilege
 {
@@ -40,10 +45,11 @@ public interface ICommandOption
 public interface ICommand
 {
     // Meta
-    string[] names       { get; }
-    string   description { get; }
-    string   usage       { get; }
-    bool     allowdInDm  { get; }
+    string[]         names       { get; }
+    string           description { get; }
+    ECommandCategory category    { get; }
+    string           usage       { get; }
+    bool             allowdInDm  { get; }
 
     ICommandOption[]  options   { get; }
     ECommandPrivilege privilege { get; }
