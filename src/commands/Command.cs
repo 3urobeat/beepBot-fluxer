@@ -4,7 +4,7 @@
  * Created Date: 2026-04-10 16:01:14
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-16 17:28:29
+ * Last Modified: 2026-04-16 21:28:46
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -50,4 +50,21 @@ public interface ICommand
 
     // Called by Fluxify when command with matching name got executed
     Task runAsync(CommandContext ctx);
+}
+
+
+// Provides command handling functions
+public static class CommandHandler
+{
+    // Finds all classes implementing ICommand
+    public static IEnumerable<Type> getAllCommands()
+    {
+        return typeof(ICommand).Assembly.GetTypes().Where(t => typeof(ICommand).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+    }
+
+    // Creates an instance of a Command type
+    public static ICommand getCommandInstance(Type cmdType)
+    {
+        return (ICommand) Activator.CreateInstance(cmdType)!;
+    }
 }

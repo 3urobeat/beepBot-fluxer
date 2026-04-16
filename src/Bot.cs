@@ -4,7 +4,7 @@
  * Created Date: 2026-04-09 22:49:21
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-16 20:57:43
+ * Last Modified: 2026-04-16 21:26:52
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -22,6 +22,8 @@ using Fluxify.Commands.TextCommand;
 using Fluxify.Core;
 using Fluxify.Core.Credentials;
 using Fluxify.Application.Entities.Guilds;
+
+using static CommandHandler;
 
 
 // Bot Singleton
@@ -64,12 +66,12 @@ sealed class Bot
         Logger.Instance.LogInformation("Registering commands...");
 
         // Find all classes implementing ICommand
-        var commands = typeof(ICommand).Assembly.GetTypes().Where(t => typeof(ICommand).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+        var commands = getAllCommands();
         int registerCount = 0;
 
         foreach (Type commandType in commands)
         {
-            ICommand command = (ICommand) Activator.CreateInstance(commandType)!;
+            ICommand command = getCommandInstance(commandType);
 
             // Register each alias of this command
             foreach (string name in command.names)
