@@ -1,3 +1,29 @@
 {
-    "cmdPing": "Pong!"
+    "cmd": {
+        "_blank": {
+            "description": "",
+            "params": {
+                "<optionName>": {
+                    "name": "",
+                    "description": ""
+                }
+            },
+            "<any>": ""
+        },
+
+        "ping": {
+            "description": "Returns the ping and heartbeat of the bot.",
+            "ping": "Ping?",
+            "pong": "Pong!"
+        },
+        "help": {
+            "description": "List of all commands or information of a specific command.",
+            "params": {
+                "cmdName": {
+                    "name": "command name",
+                    "description": "Provide a command name to get detailed information about this command"
+                }
+            }
+        }
+    }
 }

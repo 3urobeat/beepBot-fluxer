@@ -4,7 +4,7 @@
  * Created Date: 2026-04-15 21:25:31
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-16 21:33:59
+ * Last Modified: 2026-04-16 22:31:39
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -16,7 +16,6 @@
 
 
 using Fluxify.Commands;
-using Fluxify.Application.Entities.Messages;
 using Fluxify.Application.Model.Messages;
 
 
@@ -25,22 +24,22 @@ public class CommandPing : ICommand
     Bot bot = Bot.Instance;
 
     public string[]         names       => [ "ping", "pong" ];
-    public string           description => "";
     public ECommandCategory category    => ECommandCategory.GENERAL;
     public string           usage       => "";
     public bool             allowdInDm  => true;
 
     public ICommandOption[]  options    => [];
-
     public ECommandPrivilege privilege  => ECommandPrivilege.ALL;
 
 
     public async Task runAsync(CommandContext ctx)
     {
+        var lang = bot.getGuildLang(ctx.Guild);
+
         // Send response message
         var messageCreate = new MessageBuilder()
             .WithEmbed(embed => embed
-                .WithTitle("Ping?")
+                .WithTitle(lang.cmd["ping"].AdditionalProperties?["ping"].GetString() ?? "Ping?")
                 .WithColor(System.Drawing.Color.FromArgb(0xFFA500))
             )
             .Build();
@@ -57,7 +56,7 @@ public class CommandPing : ICommand
                 edit.Embeds = new[]
                 {
                     new EmbedBuilder()
-                        .WithTitle("Pong!")
+                        .WithTitle(lang.cmd["ping"].AdditionalProperties?["pong"].GetString() ?? "Pong!")
                         .WithDescription($":ping_pong: {latency.TotalMilliseconds:F2}ms") // TODO: :heartbeat: _lastServerHeartbeatEvent
                         .WithColor(System.Drawing.Color.FromArgb(0x32CD32))
                         .Build()

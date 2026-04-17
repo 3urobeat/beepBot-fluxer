@@ -4,7 +4,7 @@
  * Created Date: 2026-04-10 16:01:14
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-16 21:32:42
+ * Last Modified: 2026-04-16 22:07:58
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -32,21 +32,18 @@ public enum ECommandPrivilege
 }
 
 
-public interface ICommandOption
-{
-    string name        { get; }    // Interface members are by default abstract and public
-    string description { get; }
-    bool   required    { get; }
-    string prefix      { get; }
-}
+public readonly record struct ICommandOption(
+    string optionName, // Referenced in language file
+    bool   required,
+    string prefix
+);
 
 
 // Command Definition
-public interface ICommand
+public interface ICommand                   // Interface members are by default abstract and public
 {
     // Meta
-    string[]         names       { get; }
-    string           description { get; }
+    string[]         names       { get; }   // First command name defines name in language file etc.
     ECommandCategory category    { get; }
     string           usage       { get; }
     bool             allowdInDm  { get; }

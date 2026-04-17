@@ -4,7 +4,7 @@
  * Created Date: 2026-04-10 15:09:22
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-10 15:59:04
+ * Last Modified: 2026-04-17 22:58:15
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -16,6 +16,7 @@
 
 
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.Logging;
 
 
@@ -82,5 +83,20 @@ sealed class I18n
 // Items present in a language file
 public class LangItems
 {
-    public string cmdPing { get; set; }
+    public Dictionary<string, CommandLang> cmd { get; set; } = new();
+}
+
+public class CommandLang
+{
+    public string description { get; set; } = "";
+    public Dictionary<string, ParamLang>? @params { get; set; }
+
+    [JsonExtensionData]
+    public Dictionary<string, JsonElement>? AdditionalProperties { get; set; }
+}
+
+public class ParamLang
+{
+    public string name { get; set; } = "";
+    public string description { get; set; } = "";
 }
