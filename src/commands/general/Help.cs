@@ -4,7 +4,7 @@
  * Created Date: 2026-04-16 21:35:11
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-18 23:15:10
+ * Last Modified: 2026-04-18 23:20:19
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -77,10 +77,10 @@ public class CommandHelp : ICommand
             // List aliases if applicable
             if (targetCommand.names.Length > 1)
             {
-                embed.WithField("Aliases", string.Join(", ", targetCommand.names.Skip(1).Select(n => $"`{n}`")));
+                embed.WithField(lang.aliases, string.Join(", ", targetCommand.names.Skip(1).Select(n => $"`{n}`")));
             }
 
-            embed.WithField("Usage", $"`{prefix}{primaryName} {targetCommand.usage}`");
+            embed.WithField(lang.usage, $"`{prefix}{primaryName} {targetCommand.usage}`");
 
             // Show parameters if the command has any
             if (targetCommand.options.Length > 0 && cmdLang?.@params != null)
@@ -88,12 +88,12 @@ public class CommandHelp : ICommand
                 var paramsInfo = string.Join("\n", targetCommand.options.Select(opt =>
                 {
                     var paramLang = cmdLang.@params.TryGetValue(opt.optionName, out var p) ? p : null;
-                    var required = opt.required ? "(required)" : "(optional)";
+                    var required = opt.required ? $"({lang.required})" : $"({lang.optional})";
 
                     return $"`{opt.optionName}` {required} - {paramLang?.description ?? ""}";
                 }));
 
-                embed.WithField("Parameters", paramsInfo);
+                embed.WithField(lang.parameters, paramsInfo);
             }
 
             await ctx.Message.ReplyAsync(new MessageCreate { Embeds = [embed.Build()] });

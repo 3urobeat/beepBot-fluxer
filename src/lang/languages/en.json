@@ -29,5 +29,10 @@
         }
     },
 
-    "error": "Error"
+    "error": "Error",
+    "aliases": "Aliases",
+    "usage": "Usage",
+    "required": "required",
+    "optional": "optional",
+    "parameters": "Parameters"
 }
