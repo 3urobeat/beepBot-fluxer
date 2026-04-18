@@ -4,7 +4,7 @@
  * Created Date: 2026-04-16 21:35:11
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-18 23:15:10
+ * Last Modified: 2026-04-18 23:33:53
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -38,8 +38,9 @@ public class CommandHelp : ICommand
 
     public async Task runAsync(CommandContext ctx)
     {
-        var lang   = this.bot.getGuildLang(ctx.Guild);
-        var prefix = this.bot.getGuildPrefix(ctx.Guild);
+        var lang    = this.bot.getGuildLang(ctx.Guild);
+        var langCmd = lang.cmd["help"].AdditionalProperties;
+        var prefix  = this.bot.getGuildPrefix(ctx.Guild);
 
         // Get all commands, to either list all or query for one specific command
         var allCommands = getAllCommands().Select(t => getCommandInstance(t));
@@ -59,7 +60,7 @@ public class CommandHelp : ICommand
             {
                 embed
                     .WithTitle(lang.error ?? "Error")
-                    .WithDescription((lang.cmd["help"].AdditionalProperties?["cmdNotFound"].GetString() ?? "Command '{cmdName}' not found.").Replace("{cmdName}", cmdNameParam))
+                    .WithDescription((langCmd?["cmdNotFound"].GetString() ?? "Command '{cmdName}' not found.").Replace("{cmdName}", cmdNameParam))
                     .WithColor(System.Drawing.Color.Red)
                     .Build();
                 await ctx.Message.ReplyAsync(new MessageCreate { Embeds = [embed.Build()] });
@@ -77,10 +78,10 @@ public class CommandHelp : ICommand
             // List aliases if applicable
             if (targetCommand.names.Length > 1)
             {
-                embed.WithField("Aliases", string.Join(", ", targetCommand.names.Skip(1).Select(n => $"`{n}`")));
+                embed.WithField(langCmd?["aliases"].GetString() ?? "Aliases", string.Join(", ", targetCommand.names.Skip(1).Select(n => $"`{n}`")));
             }
 
-            embed.WithField("Usage", $"`{prefix}{primaryName} {targetCommand.usage}`");
+            embed.WithField(langCmd?["usage"].GetString() ?? "Usage", $"`{prefix}{primaryName} {targetCommand.usage}`");
 
             // Show parameters if the command has any
             if (targetCommand.options.Length > 0 && cmdLang?.@params != null)
@@ -88,19 +89,19 @@ public class CommandHelp : ICommand
                 var paramsInfo = string.Join("\n", targetCommand.options.Select(opt =>
                 {
                     var paramLang = cmdLang.@params.TryGetValue(opt.optionName, out var p) ? p : null;
-                    var required = opt.required ? "(required)" : "(optional)";
+                    var required = opt.required ? $"({lang.required})" : $"({lang.optional})";
 
                     return $"`{opt.optionName}` {required} - {paramLang?.description ?? ""}";
                 }));
 
-                embed.WithField("Parameters", paramsInfo);
+                embed.WithField(langCmd?["parameters"].GetString() ?? "Parameters", paramsInfo);
             }
 
             await ctx.Message.ReplyAsync(new MessageCreate { Embeds = [embed.Build()] });
         }
         else // General help: show all commands grouped by category
         {
-            embed.WithTitle(lang.cmd["help"].AdditionalProperties?["commandList"].GetString() ?? "Command List");
+            embed.WithTitle(langCmd?["commandList"].GetString() ?? "Command List");
 
             // Build field value with all commands in this category
             foreach (var group in allCommands.GroupBy(c => c.category))

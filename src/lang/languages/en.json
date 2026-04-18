@@ -20,6 +20,9 @@
             "description": "Shows all commands or detailed info for a specific command",
             "commandList": "Command List",
             "cmdNotFound": "Command '{cmdName}' not found.",
+            "aliases": "Aliases",
+            "usage": "Usage",
+            "parameters": "Parameters",
             "params": {
                 "cmdName": {
                     "name": "command name",
@@ -29,5 +32,7 @@
         }
     },
 
-    "error": "Error"
+    "error": "Error",
+    "required": "required",
+    "optional": "optional"
 }

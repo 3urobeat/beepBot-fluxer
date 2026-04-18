@@ -4,7 +4,7 @@
  * Created Date: 2026-04-10 15:09:22
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-18 19:02:12
+ * Last Modified: 2026-04-18 23:30:42
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -85,7 +85,9 @@ public class LangItems
 {
     public Dictionary<string, CommandLang> cmd { get; set; } = new();
 
-    public string error { get; set; } = "";
+    public string error         { get; set; } = "";
+    public string required      { get; set; } = "";
+    public string optional      { get; set; } = "";
 }
 
 public class CommandLang
@@ -99,6 +101,6 @@ public class CommandLang
 
 public class ParamLang
 {
-    public string name { get; set; } = "";
-    public string description { get; set; } = "";
+    public string name          { get; set; } = "";
+    public string description   { get; set; } = "";
 }
