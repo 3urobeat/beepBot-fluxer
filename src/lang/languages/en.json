@@ -17,7 +17,9 @@
             "pong": "Pong!"
         },
         "help": {
-            "description": "List of all commands or information of a specific command.",
+            "description": "Shows all commands or detailed info for a specific command",
+            "commandList": "Command List",
+            "cmdNotFound": "Command '{cmdName}' not found.",
             "params": {
                 "cmdName": {
                     "name": "command name",
@@ -25,5 +27,7 @@
                 }
             }
         }
-    }
+    },
+
+    "error": "Error"
 }

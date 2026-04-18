@@ -4,7 +4,7 @@
  * Created Date: 2026-04-09 22:49:21
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-16 21:26:52
+ * Last Modified: 2026-04-18 21:58:03
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -111,5 +111,13 @@ sealed class Bot
     {
         // TODO: [...]
         return I18n.I.get(Lang.EN);
+    }
+
+
+    // Returns bot prefix set for this guild
+    public string getGuildPrefix(Guild guild)
+    {
+        // TODO: [...]
+        return "*";
     }
 }

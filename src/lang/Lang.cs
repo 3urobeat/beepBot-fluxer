@@ -4,7 +4,7 @@
  * Created Date: 2026-04-10 15:09:22
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-17 22:58:15
+ * Last Modified: 2026-04-18 19:02:12
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -84,6 +84,8 @@ sealed class I18n
 public class LangItems
 {
     public Dictionary<string, CommandLang> cmd { get; set; } = new();
+
+    public string error { get; set; } = "";
 }
 
 public class CommandLang
