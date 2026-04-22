@@ -4,7 +4,7 @@
  * Created Date: 2026-04-10 16:01:14
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-16 22:07:58
+ * Last Modified: 2026-04-18 23:24:57
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -20,7 +20,8 @@ using Fluxify.Commands;
 
 public enum ECommandCategory
 {
-    GENERAL
+    GENERAL,
+    INFO
 }
 
 public enum ECommandPrivilege

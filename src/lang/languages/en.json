@@ -29,6 +29,16 @@
                     "description": "Provide a command name to get detailed information about this command"
                 }
             }
+        },
+        "avatar": {
+            "description": "Retrieves your avatar or the one of the provided user",
+            "openInBrowser": "Click here to open the image in your browser",
+            "params": {
+                "cmdName": {
+                    "name": "user",
+                    "description": "Gets the avatar of a specific user"
+                }
+            }
         }
     },
 
