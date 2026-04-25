@@ -4,7 +4,7 @@
  * Created Date: 2026-04-09 22:49:21
  * Author: 3urobeat
  *
- * Last Modified: 2026-04-18 21:58:03
+ * Last Modified: 2026-04-25 22:38:57
  * Modified By: 3urobeat
  *
  * Copyright (c) 2026 3urobeat <https://github.com/3urobeat>
@@ -36,7 +36,11 @@ sealed class Bot
 
     private readonly BotConfig cfg = new BotConfig("*")
     {
-        Credentials = new BotTokenCredentials(Environment.GetEnvironmentVariable("FLUXER_BOT_TOKEN")!)
+        Credentials = new BotTokenCredentials(Environment.GetEnvironmentVariable("FLUXER_BOT_TOKEN")!),
+        FluxerConfig =
+        {
+            LoggerFactory = LoggerFactory.Create(builder => builder.AddConsole())
+        }
     };
 
 
